@@ -1,0 +1,6 @@
+dataset_key,source_id,source_url,licence,access_date,target_column,domain,duplicate_group,task_type,path,sha256,verified
+synthetic_0,0,generated:sklearn.make_classification,generated,2026-10-23,target,synthetic,synthetic_0,classification,,,true
+synthetic_1,1,generated:sklearn.make_classification,generated,2026-10-23,target,synthetic,synthetic_1,classification,,,true
+synthetic_2,2,generated:sklearn.make_classification,generated,2026-10-23,target,synthetic,synthetic_2,classification,,,true
+synthetic_val,3,generated:sklearn.make_classification,generated,2026-10-23,target,synthetic,synthetic_val,classification,,,true
+synthetic_test,4,generated:sklearn.make_classification,generated,2026-10-23,target,synthetic,synthetic_test,classification,,,true

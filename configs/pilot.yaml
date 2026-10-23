@@ -1,0 +1,24 @@
+schema_version: 1
+seed: 42
+budget: 8
+folds: 3
+outer_test_fraction: 0.25
+methods: [random, optuna, ppo]
+datasets: [synthetic_0, synthetic_1, synthetic_2]
+manifest: data/dataset_manifest.csv
+split_manifest: data/split_manifest.csv
+metric: f1_macro
+# No target metric until a validation-derived threshold is preregistered.
+target_score: null
+ppo:
+  learning_rate: 0.0003
+  n_steps_max: 16
+  batch_size_max: 16
+  n_epochs: 2
+  gamma: 0.99
+  ent_coef: 0.01
+search_space:
+  scalers: [none, standard, minmax]
+  selection: [all, k10]
+  classifiers: [logistic, tree, forest, svc]
+  hyperparameter_levels: [0, 1]

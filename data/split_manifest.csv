@@ -1,0 +1,6 @@
+dataset_key,split
+synthetic_0,meta_train
+synthetic_1,meta_train
+synthetic_2,meta_train
+synthetic_val,meta_val
+synthetic_test,meta_test
