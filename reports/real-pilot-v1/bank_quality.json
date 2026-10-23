@@ -1,0 +1,20 @@
+{
+  "uci_109": {
+    "count": 96,
+    "minimum": 0.5329343147651426,
+    "maximum": 0.9922275216392864,
+    "distinct_scores": 37
+  },
+  "uci_17": {
+    "count": 96,
+    "minimum": 0.8762660066173313,
+    "maximum": 0.9723385284802943,
+    "distinct_scores": 42
+  },
+  "uci_52": {
+    "count": 96,
+    "minimum": 0.6690071453015204,
+    "maximum": 0.9402345829206082,
+    "distinct_scores": 39
+  }
+}

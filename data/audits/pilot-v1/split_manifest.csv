@@ -1,0 +1,9 @@
+dataset_key,split
+uci_109,meta_train
+uci_17,meta_train
+uci_52,meta_train
+uci_42,meta_val
+uci_267,meta_val
+uci_53,meta_test
+uci_144,meta_test
+uci_151,meta_test

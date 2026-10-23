@@ -1,0 +1,28 @@
+schema_version: 1
+seed: 11
+seeds: [11, 29, 47]
+split_seed: 2026
+budget: 32
+folds: 2
+outer_test_fraction: 0.25
+methods: [random, optuna, ppo]
+datasets: [uci_109, uci_17, uci_52]
+manifest: data/audits/pilot-v1/dataset_manifest.csv
+split_manifest: data/audits/pilot-v1/split_manifest.csv
+freeze_file: data/audits/pilot-v1/freeze.json
+metric: f1_macro
+target_score: null
+report_outer_score: false
+trial_timeout_seconds: 120
+ppo:
+  learning_rate: 0.0003
+  n_steps_max: 32
+  batch_size_max: 16
+  n_epochs: 4
+  gamma: 0.99
+  ent_coef: 0.01
+search_space:
+  scalers: [none, standard, minmax]
+  selection: [all, k10]
+  classifiers: [logistic, tree, forest, svc]
+  hyperparameter_levels: [0, 1]

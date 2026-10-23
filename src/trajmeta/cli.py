@@ -37,6 +37,8 @@ def load_config(path):
     if not config["datasets"] or len(set(config["datasets"])) != len(config["datasets"]):
         raise ValueError("Datasets must be nonempty and unique")
     candidates(config["search_space"])
+    if config.get("trial_timeout_seconds") is not None and config["trial_timeout_seconds"] <= 0:
+        raise ValueError("Trial timeout must be positive")
     return config
 
 
@@ -62,6 +64,11 @@ def run(config_path, output, bank=False, root=None):
     root = Path(root or Path(config_path).resolve().parent.parent)
     config = load_config(config_path)
     manifest, splits = root / config["manifest"], root / config["split_manifest"]
+    if config.get("freeze_file"):
+        frozen = json.loads((root / config["freeze_file"]).read_text(encoding="utf-8"))
+        for path in (manifest, splits):
+            if sha256(path.read_bytes()).hexdigest() != frozen["hashes"][path.name]:
+                raise ValueError("Frozen benchmark manifest was modified")
     inventory = audit_manifests(pd.read_csv(manifest), pd.read_csv(splits)).set_index("dataset_key")
     if not set(config["datasets"]).issubset(inventory.index):
         raise ValueError("Configured dataset missing from manifest")
@@ -81,29 +88,36 @@ def run(config_path, output, bank=False, root=None):
     summaries, trajectories = [], []
     for key, row in chosen.iterrows():
         X, y = load_dataset(row, root)
-        task = split_task(X, y, config["seed"], config["outer_test_fraction"], config["folds"])
+        split_seed = config.get("split_seed", config["seed"])
+        task = split_task(X, y, split_seed, config["outer_test_fraction"], config["folds"])
         methods = ["ppo"] if bank else config["methods"]
         for method in methods:
             start = perf_counter()
-            evaluator = Evaluator(task.X_train, task.y_train, config["budget"], config["folds"], config["seed"])
             directory = output / key / method
             directory.mkdir(parents=True)
-            if method == "ppo":
-                episodes = run_ppo(evaluator, config["search_space"], config["seed"], config["ppo"], directory / "policy.zip")
-            else:
-                episodes = {"random": run_random, "optuna": run_optuna}[method](evaluator, config["search_space"], config["seed"])
+            evaluator = Evaluator(task.X_train, task.y_train, config["budget"], config["folds"], config["seed"],
+                                  split_seed=split_seed, trial_timeout_seconds=config.get("trial_timeout_seconds"),
+                                  log_path=directory / "evaluations.jsonl")
+            try:
+                if method == "ppo":
+                    episodes = run_ppo(evaluator, config["search_space"], config["seed"], config["ppo"], directory / "policy.zip")
+                else:
+                    episodes = {"random": run_random, "optuna": run_optuna}[method](evaluator, config["search_space"], config["seed"])
+            finally:
+                evaluator.close()
             search_seconds = perf_counter() - start
             best = evaluator.best
             summary = {"dataset_key": key, "split": row.split, "method": method, "seed": config["seed"],
                        "synthetic": row.source_url.startswith("generated:"), "evaluations": len(evaluator.records),
                        "failures": sum(r["status"] != "ok" for r in evaluator.records),
                        "best_inner_score": best["inner_score"] if best else None,
-                       "search_seconds": search_seconds, "target_score": config["target_score"], "n_target": None}
+                       "search_seconds": search_seconds, "target_score": config["target_score"], "n_target": None,
+                       "split_seed": split_seed}
             if config["target_score"] is not None:
                 summary["n_target"] = next((r["evaluation"] for r in evaluator.records
                                             if r["status"] == "ok" and r["inner_score"] >= config["target_score"]), None)
             # The bank never needs to open outer-test labels.
-            if best and not bank:
+            if best and not bank and config.get("report_outer_score", True):
                 summary.update(final_score(Candidate(**best["pipeline_config"]), task, config["seed"]))
             for episode in episodes:
                 record = {**episode, "schema_version": SCHEMA_VERSION,

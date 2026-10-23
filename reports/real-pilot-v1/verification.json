@@ -1,0 +1,33 @@
+{
+  "runs": 27,
+  "evaluations": 864,
+  "statuses": {
+    "ok": 864
+  },
+  "search_seconds_total": 128.07367879999765,
+  "warning_trials": 155,
+  "bank_trajectories": 288,
+  "bank_transitions": 1152,
+  "outer_scores_computed": false,
+  "meta_validation_or_test_model_runs": 0,
+  "target_score": null,
+  "data_split_seed": 2026,
+  "algorithm_seeds": [
+    11,
+    29,
+    47
+  ],
+  "limitations": [
+    "3 training tasks only",
+    "no transfer component evaluated",
+    "no N_target threshold selected",
+    "startup and checkpoint overhead included in search time",
+    "no hard RAM limit or peak-RAM measurement",
+    "run git_commit is the parent commit; recorded source_sha256 identifies the uncommitted implementation"
+  ],
+  "tests_passed": 32,
+  "warning_categories": {
+    "constant_feature_trials": 124,
+    "logistic_iteration_limit_trials": 31
+  }
+}

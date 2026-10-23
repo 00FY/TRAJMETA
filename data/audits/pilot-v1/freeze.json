@@ -1,0 +1,12 @@
+{
+  "scope": "pilot-v1",
+  "hashes": {
+    "dataset_manifest.csv": "f99c1238381c89dd06d8d65fe0e293fcd375aa8bc4f0a05360b608040f3b0e89",
+    "split_manifest.csv": "bc78579ac6b7405061b9c948f285b632c1de4669d0955f4b498a30bccc2b7de4",
+    "audit.json": "093037522f0e1528170f06bbb0f7118b9c6982d9b8e4da28e3fa90bc10bdf596"
+  },
+  "split_seed": 2026,
+  "folds": 2,
+  "selection_basis": "size, documented role schema, reuse terms; no model scores",
+  "warning": "Not a full meta-learning benchmark; related-version review remains necessary for expansion"
+}

@@ -1,0 +1,12 @@
+# Dataset attribution
+
+The admitted pilot datasets are distributed by UCI under CC BY 4.0, as recorded on each individual dataset page at audit time. Raw and processed data are not committed. The original creator credit and DOI are retained below. Processing keeps documented features, removes source identifiers and exact duplicate rows, and writes a canonical CSV; no missing-value imputation is performed before splitting.
+
+- Stefan Aeberhard, M. Forina. **Wine**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/109/wine); [DOI](https://doi.org/10.24432/C5PC7J); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- William Wolberg, Olvi Mangasarian, Nick Street, W. Street. **Breast Cancer Wisconsin (Diagnostic)**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic); [DOI](https://doi.org/10.24432/C5DW2B); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- V. Sigillito, S. Wing, L. Hutton, K. Baker. **Ionosphere**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/52/ionosphere); [DOI](https://doi.org/10.24432/C5W01B); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- B. German. **Glass Identification**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/42/glass+identification); [DOI](https://doi.org/10.24432/C5WW2P); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- Volker Lohweg. **Banknote Authentication**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/267/banknote+authentication); [DOI](https://doi.org/10.24432/C55P57); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- R. A. Fisher. **Iris**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/53/iris); [DOI](https://doi.org/10.24432/C56C76); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- Hans Hofmann. **Statlog (German Credit Data)**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data); [DOI](https://doi.org/10.24432/C5NC77); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- Terry Sejnowski, R. Gorman. **Connectionist Bench (Sonar, Mines vs. Rocks)**. UCI Machine Learning Repository. [Source](https://archive.ics.uci.edu/dataset/151/connectionist+bench+sonar+mines+vs+rocks); [DOI](https://doi.org/10.24432/C5T01Q); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

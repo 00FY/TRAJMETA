@@ -2,7 +2,7 @@
 
 A working first milestone for the supplied TrajMeta-AutoML research design: search for tabular classification pipelines, compare fixed-budget baselines, and record PPO construction trajectories for later transfer learning.
 
-**Status: foundation implemented; research hypothesis not yet evaluated.** Generated datasets exercise the implementation without downloading benchmark data. They do not establish generalization, transfer benefit, or the proposed 30% reduction in evaluations.
+**Status: foundation and initial real-data audit implemented; transfer hypothesis not yet evaluated.** Synthetic fixtures remain for regression tests. The real-data milestone adds an eight-dataset UCI pilot admission audit, frozen splits, repeated-seed baselines, trial deadlines, and a training-only bank exporter. See [the real-data protocol](docs/REAL_DATA_PROTOCOL.md) and [dataset attribution](docs/DATA_ATTRIBUTION.md). Neither pilot establishes transfer benefit or the proposed 30% reduction in evaluations.
 
 ## Quick start
 
@@ -35,9 +35,9 @@ Output directories must be new. Runs never overwrite prior evidence. Default dir
 
 ## Experimental contract
 
-The evaluator only receives outer-training rows. Imputation, categorical encoding, scaling, and selection are fitted separately in every inner training fold. Outer-test scores are computed once for the best successful candidate after each baseline search. Bank generation never evaluates outer-test scores. No outer score is an observation or reward.
+The evaluator only receives outer-training rows. Imputation, categorical encoding, scaling, and selection are fitted separately in every inner training fold. When reporting is enabled, outer-test scores are computed once for the best successful candidate after each baseline search. Real-data development configurations disable this reporting. Bank generation never evaluates outer-test scores. No outer score is an observation or reward.
 
-All methods consume exactly the configured number of evaluations, including repeat configurations and failed candidates. No method gets free cached scores. Final fitting is additional work outside the search budget. The summary's `search_seconds` includes controller overhead and PPO checkpoint writing; per-evaluation times are also logged. Runs are single-process CPU experiments; a trial time/memory limiter is not implemented, so use small datasets only.
+All methods consume exactly the configured number of evaluations, including repeat configurations and failed candidates. No method gets free cached scores. Final fitting is additional work outside the search budget. The summary's `search_seconds` includes controller overhead and PPO checkpoint writing; per-evaluation times are also logged. Runs are sequential CPU experiments. Real-data configurations isolate CV in a spawned worker with a per-trial wall-time limit; failed and timed-out trials count toward the budget. There is no hard RAM limit, so use the audited dataset size bounds.
 
 PPO receives a flat discrete action space whose size is the least common multiple of stage menu lengths. At each stage, action modulo menu length determines the choice. Every valid choice has the same number of aliases. The default has twelve action IDs and 48 complete configurations. The observation combines seven bounded training-data descriptors, one-hot partial choices, a stage indicator, the previous action, used-budget fraction, and best inner score. Dataset IDs are excluded. Dataset descriptors use fixed transforms, not statistics fitted on held-out datasets. The exact order is in `env.py`.
 
@@ -53,7 +53,7 @@ The loader checks the checksum before loading. Missing target labels and insuffi
 
 ## Next milestones
 
-1. Audit the real candidate dataset pool, identify duplicate/related datasets, freeze splits, and run a three-dataset CPU cost pilot. Do not treat synthetic fixtures as independent benchmark domains.
+1. Expand the initial eight-dataset audit toward the full research pool, including OpenML mirror and related-version checks. The frozen pilot split is not the final generalization benchmark.
 2. Generate a larger training-only PPO bank with multiple seeds. Assess PPO learning against Random Search and Optuna before proceeding.
 3. Train the shared LSTM using within-dataset quality ranks and held-out training trajectories. Check partial/full embedding compatibility and collapse, including a simple non-learned retrieval baseline.
 4. Add metadata shortlisting, trajectory retrieval, and validation-selected gates. Freeze the encoder/index and potential definition for each run. The shaping math is present, but no learned retriever or shaped PPO is claimed yet.

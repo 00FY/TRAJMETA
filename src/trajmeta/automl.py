@@ -77,12 +77,21 @@ class BudgetExhausted(RuntimeError):
 
 class Evaluator:
     """This object receives no outer-test data. Failed/duplicate trials also consume budget."""
-    def __init__(self, X_train, y_train, budget, folds, seed):
+    def __init__(self, X_train, y_train, budget, folds, seed, split_seed=None, trial_timeout_seconds=None, log_path=None):
         if budget < 1 or folds < 2:
             raise ValueError("Budget must be positive and folds at least two")
         self.X, self.y, self.budget, self.seed = X_train, y_train, budget, seed
-        self.folds = list(StratifiedKFold(folds, shuffle=True, random_state=seed).split(X_train, y_train))
+        self.folds = list(StratifiedKFold(folds, shuffle=True, random_state=seed if split_seed is None else split_seed).split(X_train, y_train))
         self.records = []
+        self.log_path = log_path
+        self.worker = None
+        if trial_timeout_seconds is not None:
+            from .timed import CVWorker
+            self.worker = CVWorker(self.X, self.y, self.folds, seed, trial_timeout_seconds)
+
+    def close(self):
+        if self.worker is not None:
+            self.worker.close()
 
     @property
     def best(self):
@@ -95,15 +104,30 @@ class Evaluator:
         start = perf_counter()
         record = {"evaluation": len(self.records) + 1, "pipeline_config": asdict(candidate)}
         try:
-            scores = cross_val_score(build_pipeline(candidate, self.seed), self.X, self.y,
-                                     cv=self.folds, scoring="f1_macro", error_score="raise", n_jobs=1)
+            if self.worker is None:
+                scores = cross_val_score(build_pipeline(candidate, self.seed), self.X, self.y,
+                                         cv=self.folds, scoring="f1_macro", error_score="raise", n_jobs=1)
+            else:
+                result = self.worker.evaluate(candidate)
+                record["warnings"] = result["warnings"]
+                if result["error"] is not None:
+                    record.update(status=result["status"], inner_score=0.0, fold_scores=[], error=result["error"])
+                    return self._finish(record, start)
+                scores = np.asarray(result["scores"])
             if not np.isfinite(scores).all():
                 raise ValueError("Non-finite validation score")
             record.update(status="ok", inner_score=float(scores.mean()), fold_scores=scores.tolist(), error=None)
         except (ValueError, TypeError, FloatingPointError) as exc:
             record.update(status="failed", inner_score=0.0, fold_scores=[], error=str(exc))
+        return self._finish(record, start)
+
+    def _finish(self, record, start):
         record["elapsed_seconds"] = perf_counter() - start
         self.records.append(record)
+        if self.log_path is not None:
+            import json
+            with open(self.log_path, "a", encoding="utf-8") as handle:
+                handle.write(json.dumps(record, allow_nan=False) + "\n")
         return record
 
 

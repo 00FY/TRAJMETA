@@ -32,7 +32,7 @@ def audit_manifests(manifest, splits):
     if (merged.groupby("duplicate_group").split.nunique() > 1).any():
         raise ValueError("Duplicate groups cross dataset splits")
     # Identical downloaded files and source identities must not cross splits either.
-    for column in ["sha256", "source_url"]:
+    for column in ["sha256", "source_url"] + (["content_fingerprint"] if "content_fingerprint" in merged else []):
         groups = merged.dropna(subset=[column])
         if column == "source_url":
             groups = groups[~groups.source_url.str.startswith("generated:")]
@@ -53,6 +53,12 @@ def load_dataset(row, root):
     if not path.is_file() or sha256(path.read_bytes()).hexdigest() != str(row.sha256):
         raise ValueError("Dataset file missing or SHA256 differs from the manifest")
     frame = pd.read_csv(path)
+    if "categorical_columns" in row.index and pd.notna(row.categorical_columns):
+        import json
+        for name in json.loads(row.categorical_columns):
+            if name not in frame:
+                raise ValueError("Categorical schema column missing")
+            frame[name] = frame[name].astype("str").where(frame[name].notna(), np.nan)
     if row.target_column not in frame:
         raise ValueError("Target column missing")
     return frame.drop(columns=[row.target_column]), frame[row.target_column]

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "path": "artifacts/real-bank-v1/trajectories.jsonl",
+  "sha256": "86444b4377c97cb8fde987c4cb831de39d519b12be589a8ccadb8f27049557b1",
+  "trajectories": 288,
+  "transitions": 1152,
+  "dataset_counts": {
+    "uci_109": 96,
+    "uci_17": 96,
+    "uci_52": 96
+  },
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "note": "Full bank and checkpoints stay local; reproduce with the documented commands."
+}
