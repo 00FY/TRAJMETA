@@ -1,0 +1,15 @@
+{
+  "evaluations": 864,
+  "warning_bearing_trials": 155,
+  "failed_trials": 0,
+  "warning_messages": {
+    "lbfgs failed to converge after 1000 iteration(s) (status=1):\nSTOP: TOTAL NO. OF ITERATIONS REACHED LIMIT\n\nIncrease the number of iterations to improve the convergence (max_iter=1000).\nYou might also want to scale the data as shown in:\n    https://scikit-learn.org/stable/modules/preprocessing.html\nPlease also refer to the documentation for alternative solver options:\n    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression": 31,
+    "Features [1] are constant.": 124,
+    "invalid value encountered in divide": 124
+  },
+  "resolution": {
+    "constant_features": "Finite ANOVA scores: constants score zero; perfect separators retain largest finite score. Applied inside each training fold.",
+    "logistic_convergence": "Raise max_iter from 1000 to 5000. Any residual warnings remain logged; no guarantee of convergence is asserted."
+  },
+  "version_policy": "Original pilot scores retained unchanged. All study methods and bank generation use the updated evaluator."
+}

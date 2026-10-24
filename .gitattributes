@@ -1,0 +1,5 @@
+# Frozen provenance hashes cover exact bytes; disable checkout newline conversion.
+src/** -text
+data/audits/** -text
+reports/** -text
+models/** -text

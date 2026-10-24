@@ -1,0 +1,17 @@
+{
+  "scope": "small CPU study-v1",
+  "hashes": {
+    "dataset_manifest.csv": "99dcdd9a6cd19712e2aee836969b6ed419cefa8af91f37209d5ab7f52b63a620",
+    "split_manifest.csv": "33b7276d3314251eb8b4182fc4a5c2cc5228e2547d432430a612afccedacfb45",
+    "audit.json": "b7bde4a96d2cb395e569e10e5c153cf815bf8f8fcb9d73c787c6f4152ad0357d",
+    "candidate_decisions.csv": "c9fa82eea6deefbd65eb4829268c2250c92f8ea2626dc8106c8cc23083893625"
+  },
+  "preserved_holdouts": [
+    "uci_42",
+    "uci_267",
+    "uci_53",
+    "uci_144",
+    "uci_151"
+  ],
+  "selection_basis": "licence, size, role schema, duplicates and split feasibility; no added-task scores"
+}

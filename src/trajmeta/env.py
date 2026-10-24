@@ -11,7 +11,7 @@ from .data import profile
 class PipelineEnv(gym.Env):
     metadata = {"render_modes": []}
 
-    def __init__(self, evaluator, space):
+    def __init__(self, evaluator, space, retriever=None, shaping_strength=0., gamma=.99):
         super().__init__()
         candidates(space)  # Validate before starting a rollout.
         self.evaluator = evaluator
@@ -24,6 +24,7 @@ class PipelineEnv(gym.Env):
         self.observation_space = gym.spaces.Box(0, 1, shape=(width,), dtype=np.float32)
         self.episodes = []
         self.stage = 4
+        self.retriever, self.shaping_strength, self.gamma = retriever, shaping_strength, gamma
 
     def _observation(self):
         choices = np.zeros(sum(self.sizes), dtype=np.float32)
@@ -46,6 +47,7 @@ class PipelineEnv(gym.Env):
         if seed is not None:
             self.action_space.seed(seed)
         self.stage, self.choices, self.previous, self.steps = 0, [], None, []
+        self.current_potential = 0.
         return self._observation(), {}
 
     def step(self, action):
@@ -65,9 +67,16 @@ class PipelineEnv(gym.Env):
             reward = record["inner_score"]
             info = {"evaluation": record["evaluation"], "status": record["status"]}
         next_state = self._observation()
-        self.steps.append({"state": state.tolist(), "action": int(action), "base_reward": reward,
-                           "shaped_reward": reward, "potential": 0.0, "next_potential": 0.0,
-                           "shaping_difference": 0.0, "next_state": next_state.tolist(), "done": done})
+        step={"state":state.tolist(),"action":int(action),"base_reward":reward,
+              "next_state":next_state.tolist(),"done":done}
+        retrieval={'potential':0.,'accepted':False,'trajectory_ids':[],'similarities':[],'max_similarity':None}
+        if self.retriever is not None and not done:
+            retrieval=self.retriever.query(self.steps+[step], self.meta)
+        from .shaping import shape_reward
+        components=shape_reward(reward,self.current_potential,retrieval['potential'],
+                                gamma=self.gamma,strength=self.shaping_strength,terminal=done)
+        self.current_potential=components['next_potential']
+        self.steps.append({**step,**components,'retrieval':{k:v for k,v in retrieval.items() if k!='indices'}})
         if done:
             self.episodes.append({"steps": self.steps.copy(), **record})
-        return next_state, reward, done, False, info
+        return next_state, components['shaped_reward'], done, False, info

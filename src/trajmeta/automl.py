@@ -4,6 +4,7 @@ from itertools import product
 from time import perf_counter
 
 import numpy as np
+import warnings
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.ensemble import RandomForestClassifier
@@ -42,17 +43,25 @@ class CappedSelectKBest(TransformerMixin, BaseEstimator):
         self.k = k
 
     def fit(self, X, y):
-        self.selector_ = SelectKBest(f_classif, k=min(self.k, X.shape[1])).fit(X, y)
+        self.selector_ = SelectKBest(finite_f_classif, k=min(self.k, X.shape[1])).fit(X, y)
         return self
 
     def transform(self, X):
         return self.selector_.transform(X)
 
 
+def finite_f_classif(X, y):
+    """Constants get score zero; perfect separators keep the highest finite rank."""
+    with warnings.catch_warnings(), np.errstate(divide='ignore', invalid='ignore'):
+        warnings.filterwarnings('ignore', message='Features .* are constant', category=UserWarning)
+        scores, p = f_classif(X, y)
+    return np.nan_to_num(scores, nan=0.0, posinf=np.finfo(float).max), np.nan_to_num(p, nan=1.0)
+
+
 def build_pipeline(candidate, seed):
     scales = {"none": "passthrough", "standard": StandardScaler(), "minmax": MinMaxScaler()}
     models = {
-        "logistic": LogisticRegression(C=[0.1, 1.0][candidate.level], max_iter=1000, random_state=seed),
+        "logistic": LogisticRegression(C=[0.1, 1.0][candidate.level], max_iter=5000, random_state=seed),
         "tree": DecisionTreeClassifier(max_depth=[3, 8][candidate.level], random_state=seed),
         "forest": RandomForestClassifier(n_estimators=40, max_depth=[4, None][candidate.level],
                                          random_state=seed, n_jobs=1),

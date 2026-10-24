@@ -1,4 +1,4 @@
-"""Tested math only; learned retrieval is deliberately not wired into PPO yet."""
+"""Bounded potential shaping shared by the transfer environment and tests."""
 import numpy as np
 
 
