@@ -1,0 +1,77 @@
+{
+  "trajectories": 1056,
+  "transitions": 4224,
+  "failures": 0,
+  "warning_bearing_trials": 4,
+  "warning_messages": {
+    "lbfgs failed to converge after 5000 iteration(s) (status=1):\nSTOP: TOTAL NO. OF ITERATIONS REACHED LIMIT\n\nIncrease the number of iterations to improve the convergence (max_iter=5000).\nYou might also want to scale the data as shown in:\n    https://scikit-learn.org/stable/modules/preprocessing.html\nPlease also refer to the documentation for alternative solver options:\n    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression": 4
+  },
+  "tasks": {
+    "uci_101": {
+      "trajectories": 96,
+      "distinct_scores": 24,
+      "min_score": 0.6396135647188933,
+      "max_score": 0.9501157942928435
+    },
+    "uci_109": {
+      "trajectories": 96,
+      "distinct_scores": 36,
+      "min_score": 0.5329343147651426,
+      "max_score": 0.9922275216392864
+    },
+    "uci_12": {
+      "trajectories": 96,
+      "distinct_scores": 24,
+      "min_score": 0.5046255394992172,
+      "max_score": 0.6680128617228452
+    },
+    "uci_15": {
+      "trajectories": 96,
+      "distinct_scores": 21,
+      "min_score": 0.9105106046165665,
+      "max_score": 0.9625149151519372
+    },
+    "uci_17": {
+      "trajectories": 96,
+      "distinct_scores": 42,
+      "min_score": 0.8762660066173313,
+      "max_score": 0.9723385284802943
+    },
+    "uci_19": {
+      "trajectories": 96,
+      "distinct_scores": 21,
+      "min_score": 0.3416078890500601,
+      "max_score": 0.8290608989728159
+    },
+    "uci_27": {
+      "trajectories": 96,
+      "distinct_scores": 41,
+      "min_score": 0.565509265230072,
+      "max_score": 0.8713442608709866
+    },
+    "uci_33": {
+      "trajectories": 96,
+      "distinct_scores": 34,
+      "min_score": 0.2208744751836857,
+      "max_score": 0.9713150534579107
+    },
+    "uci_45": {
+      "trajectories": 96,
+      "distinct_scores": 47,
+      "min_score": 0.14057142857142857,
+      "max_score": 0.33236881161462417
+    },
+    "uci_46": {
+      "trajectories": 96,
+      "distinct_scores": 47,
+      "min_score": 0.43960044809559373,
+      "max_score": 0.7383458646616541
+    },
+    "uci_52": {
+      "trajectories": 96,
+      "distinct_scores": 39,
+      "min_score": 0.6690071453015204,
+      "max_score": 0.9402345829206082
+    }
+  }
+}

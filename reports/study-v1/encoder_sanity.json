@@ -1,0 +1,39 @@
+{
+  "train_trajectories": 704,
+  "check_trajectories": 352,
+  "training_seeds": [
+    11,
+    29
+  ],
+  "check_seed": 47,
+  "feature_schema": "pre_state37+action_onehot12+masked_reward0+step_fraction_v1",
+  "terminal_reward_masked": true,
+  "prefix_quality_auc": {
+    "1": 0.493859649122807,
+    "2": 0.49678362573099416,
+    "3": 0.58408057179987,
+    "4": 0.6983755685510071
+  },
+  "mean_within_dataset_spearman": 0.34314690119513663,
+  "quality_auc": 0.6983755685510071,
+  "simple_knn_quality_auc": 0.659535412605588,
+  "within_dataset_spearman": {
+    "uci_101": -0.08147173591282013,
+    "uci_109": 0.7989363450387371,
+    "uci_12": 0.12441446245778344,
+    "uci_15": 0.6769777633485012,
+    "uci_17": 0.6775036782050188,
+    "uci_19": -0.2937028493290604,
+    "uci_27": 0.7672120099073045,
+    "uci_33": 0.24211376315743538,
+    "uci_45": 0.34224934414168684,
+    "uci_46": 0.2997539329005978,
+    "uci_52": 0.2206291992313179
+  },
+  "embedding_std_mean": 0.06706121563911438,
+  "cosine_offdiagonal_mean": 0.8733734488487244,
+  "check_mse": 0.0783401965199257,
+  "constant_rank_mse": 0.08672714233398438,
+  "gate_passed": true,
+  "limitation": "Whole-run seed holdout within training tasks; dataset-disjoint transfer checked separately on meta-validation"
+}
