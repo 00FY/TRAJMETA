@@ -31,13 +31,17 @@ def main():
     for r in rows:
         r['inner_anytime_auc']=float(np.mean(r['inner_curve']))
         r['target_reached']=int(r['n_target'] is not None)
+        r['unique_configurations']=len({json.dumps(t['pipeline_config'],sort_keys=True) for t in r['records']})
     methods=protocol['config']['methods']
-    metrics=['outer_macro_f1','outer_balanced_accuracy','inner_anytime_auc','n_target_capped','search_seconds','target_reached']
+    metrics=['outer_macro_f1','outer_balanced_accuracy','inner_anytime_auc','n_target_capped','search_seconds','target_reached','unique_configurations']
     summary={m:{k:float(np.mean([r[k] for r in rows if r['method']==m])) for k in metrics} for m in methods}
     comparisons={b:{k:paired(rows,'shaped',b,k) for k in ['outer_macro_f1','inner_anytime_auc','n_target_capped']} for b in ['random','ppo','retrieval','simple_retrieval','final_config']}
     trials=[t for r in rows for t in r['records']]
     warning_counts=Counter(w for t in trials for w in t.get('warnings',[]))
-    result={'summary':summary,'paired_shaped_minus_baseline':comparisons,'test_runs':len(rows),
+    validation=json.loads((OUT/'validation_results.json').read_text())
+    validation_auc={m:float(np.mean([np.mean(r['inner_curve']) for r in validation if r['method']==m])) for m in methods}
+    per_task={task:{m:{k:{'mean':float(np.mean(v:=[r[k] for r in rows if r['dataset_key']==task and r['method']==m])), 'seed_std':float(np.std(v,ddof=1))} for k in metrics} for m in methods} for task in sorted({r['dataset_key'] for r in rows})}
+    result={'summary':summary,'per_dataset':per_task,'validation_anytime_auc':validation_auc,'paired_shaped_minus_baseline':comparisons,'test_runs':len(rows),
             'test_evaluations':len(trials),'failed_test_trials':sum(t['status']!='ok' for t in trials),
             'warning_bearing_test_trials':sum(bool(t.get('warnings')) for t in trials),
             'warnings':dict(warning_counts),'inference_unit':'dataset; seeds averaged within each dataset',
@@ -55,7 +59,7 @@ def main():
       '## Results','']
     for m in methods:
         v=summary[m]
-        lines.append(f"- {m}: outer macro-F1 {v['outer_macro_f1']:.4f}; inner anytime mean {v['inner_anytime_auc']:.4f}; target reached {v['target_reached']:.1%}; capped target evaluations {v['n_target_capped']:.2f}; mean search time {v['search_seconds']:.2f}s.")
+        lines.append(f"- {m}: outer macro-F1 {v['outer_macro_f1']:.4f}; inner anytime mean {v['inner_anytime_auc']:.4f}; target reached {v['target_reached']:.1%}; capped target evaluations {v['n_target_capped']:.2f}; unique configurations {v['unique_configurations']:.1f}/32; mean search time {v['search_seconds']:.2f}s.")
     lines.extend(['',f"Shaped versus random changes the capped target-evaluation statistic by {reduction:.1%} (positive means fewer). Unreached targets are assigned budget + 1 for this descriptive statistic; this is not an uncensored time-to-target estimate or proof of the proposed 30% improvement.", '',
       f"There were {len(rows)} final runs, {len(trials)} charged evaluations, {result['failed_test_trials']} failed trials, and {result['warning_bearing_test_trials']} warning-bearing trials. See statistics.json and test_results.json for all outcomes.", '',
       '## Paired uncertainty','',
@@ -63,12 +67,18 @@ def main():
     for b,c in comparisons.items():
         v=c['outer_macro_f1']; lo,hi=v['task_bootstrap_95_interval']
         lines.append(f"- Shaped minus {b}, outer macro-F1: {v['mean_difference']:+.4f}; descriptive interval [{lo:+.4f}, {hi:+.4f}]; exact p={v['exact_two_sided_task_sign_flip_p']:.3f}.")
-    lines.extend(['','## Encoder diagnostics','',f"Quality AUC: {sanity['quality_auc']:.4f}; simple kNN AUC: {sanity['simple_knn_quality_auc']:.4f}; mean within-task Spearman: {sanity['mean_within_dataset_spearman']:.4f}. Prefix diagnostics and collapse checks are retained in encoder_sanity.json.",'',
+    lines.extend(['','## Encoder and validation diagnostics','',f"Quality AUC: {sanity['quality_auc']:.4f}; simple kNN AUC: {sanity['simple_knn_quality_auc']:.4f}; mean within-task Spearman: {sanity['mean_within_dataset_spearman']:.4f}. Prefix diagnostics and collapse checks are retained in encoder_sanity.json.", '',
+      f"Prefix AUC by step: {sanity['prefix_quality_auc']}. The first two steps are near chance; passing the full-trajectory gate does not establish useful early-prefix guidance.", '',
+      f"Validation inner anytime means: plain PPO {validation_auc['ppo']:.4f}, Random {validation_auc['random']:.4f}, Optuna {validation_auc['optuna']:.4f}, retrieval {validation_auc['retrieval']:.4f}, shaped {validation_auc['shaped']:.4f}. These are diagnostic development comparisons, not held-out results.", '',
       '## Limits and conclusion','',
       'The final tasks are Iris, German Credit, and Sonar. Two validation tasks and this small test pool cannot support a generalization claim across domains. UCI source availability and dataset restrictions are documented in the audit, including pending access failures. No OpenML mirror-wide audit is claimed. Search times exclude bank generation and encoder training; offline transfer costs must be amortized in any deployment comparison. There is a per-trial timeout but no hard RAM cap.', '',
       'The software and this bounded experiment are reproducible. Positive or negative point estimates do not by themselves validate trajectory transfer. A larger independently collected benchmark, more tasks, sensitivity studies, and an externally fixed score target are needed for a confirmatory research claim.', '',
       '## Reproduction','',
-      'Use the pinned environment, restore audited UCI data, run `python -m trajmeta.study --phase all`, then `python scripts/report_study.py`. Completed runs are resumed only when their signatures match; partial runs require inspection. Never alter the final protocol to fit test outcomes.'])
+      'Use the pinned environment, restore audited UCI data, run `python -m trajmeta.study --phase all`, then `python scripts/report_study.py`. Completed runs are resumed only when their signatures match; partial runs require inspection. Never alter the final protocol to fit test outcomes.', '',
+      '## Method references','',
+      '- Schulman et al. (2017), [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347). PPO is provided by Stable-Baselines3; the trajectory transfer mechanism is implemented in this repository.',
+      '- Ng, Harada and Russell (1999), [Policy invariance under reward transformations](https://ai.stanford.edu/~ang/papers/shaping-icml99.pdf). This motivates potential differences; its conditions do not establish an empirical gain or a policy-invariance guarantee for this partial-observation implementation.'])
+    lines.extend(['','## Figures','','![Aggregate final results](results.png)','','![Inner validation anytime curves, averaged across seeds](anytime.png)'])
     (OUT/'REPORT.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     import matplotlib
     matplotlib.use('Agg')
@@ -79,6 +89,19 @@ def main():
         ax.set_title(title); ax.invert_yaxis(); ax.grid(axis='x',alpha=.25)
     fig.suptitle('Three held-out datasets, three seeds; descriptive means')
     fig.savefig(OUT/'results.png',dpi=160)
+    plt.close(fig)
+    tasks=sorted({r['dataset_key'] for r in rows})
+    fig,axes=plt.subplots(1,len(tasks),figsize=(13,4),layout='constrained')
+    for ax,task in zip(axes,tasks):
+        for m in ['random','optuna','ppo','retrieval','shaped']:
+            curves=np.asarray([r['inner_curve'] for r in rows if r['dataset_key']==task and r['method']==m])
+            ax.plot(np.arange(1,curves.shape[1]+1),curves.mean(axis=0),label=m)
+        ax.axhline(protocol['selection']['target'],color='gray',linestyle=':',label='fixed target')
+        ax.set_title(task); ax.set_xlabel('Charged evaluations'); ax.set_ylabel('Best inner macro-F1'); ax.grid(alpha=.2)
+    axes[-1].legend(fontsize=8)
+    fig.suptitle('Anytime performance: three-seed means on each held-out task')
+    fig.savefig(OUT/'anytime.png',dpi=160)
+    plt.close(fig)
     print(json.dumps(result,indent=2))
 
 if __name__=='__main__': main()

@@ -11,6 +11,7 @@ dependencies = ["numpy>=1.26", "pandas>=2.2", "scikit-learn>=1.5", "gymnasium>=1
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+report = ["matplotlib>=3.9"]
 
 [project.scripts]
 trajmeta = "trajmeta.cli:main"

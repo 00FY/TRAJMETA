@@ -1,0 +1,16 @@
+{
+  "created_utc": "2026-10-24T09:32:42.249271+00:00",
+  "analysis_script_sha256": "ccd4c205158fcc1275fc5305456e6b88cf46f17758c6ee2a4195490fae88627e",
+  "primary_endpoint": "First charged evaluation reaching the single validation-derived inner macro-F1 target; unreached is censored.",
+  "descriptive_capped_endpoint": "Unreached assigned budget+1; never call this an uncensored target-time estimate.",
+  "secondary_endpoints": [
+    "outer_macro_f1",
+    "outer_balanced_accuracy",
+    "mean_best_inner_curve",
+    "wall_time",
+    "unique_configurations"
+  ],
+  "inference": "Average seeds within dataset. Pair shaped against random, PPO, retrieval, simple retrieval, and final configuration; enumerate task bootstrap and exact two-sided sign flips.",
+  "multiplicity": "Exploratory comparisons; no confirmatory multiple-comparison-adjusted claim.",
+  "decision": "Report all methods regardless of sign. Do not retune using final outcomes. Three tasks cannot establish conventional sign-flip significance."
+}
