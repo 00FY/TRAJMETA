@@ -1,0 +1,22 @@
+[
+  {
+    "threshold": 0.8,
+    "strength": 0.1,
+    "mean_inner_auc": 0.8232560221121932
+  },
+  {
+    "threshold": 0.8,
+    "strength": 0.3,
+    "mean_inner_auc": 0.8232560221121932
+  },
+  {
+    "threshold": 0.95,
+    "strength": 0.1,
+    "mean_inner_auc": 0.8144351608750782
+  },
+  {
+    "threshold": 0.95,
+    "strength": 0.3,
+    "mean_inner_auc": 0.8144351608750782
+  }
+]

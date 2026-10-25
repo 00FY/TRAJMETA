@@ -1,0 +1,79 @@
+{
+  "config": {
+    "schema_version": 1,
+    "audit": "data/audits/study-v1",
+    "seeds": [
+      11,
+      29,
+      47
+    ],
+    "split_seed": 2026,
+    "folds": 2,
+    "budget": 32,
+    "bank_budget": 32,
+    "trial_timeout_seconds": 120,
+    "methods": [
+      "random",
+      "optuna",
+      "ppo",
+      "metadata",
+      "retrieval",
+      "shaped",
+      "final_config",
+      "simple_retrieval",
+      "cold"
+    ],
+    "ppo": {
+      "learning_rate": 0.0003,
+      "n_steps_max": 32,
+      "batch_size_max": 16,
+      "n_epochs": 4,
+      "gamma": 0.99,
+      "ent_coef": 0.01
+    },
+    "retrieval": {
+      "top_k": 5,
+      "temperature": 0.1,
+      "thresholds": [
+        0.8,
+        0.95
+      ],
+      "simple_threshold": 0.5
+    },
+    "shaping_strengths": [
+      0.1,
+      0.3
+    ],
+    "search_space": {
+      "scalers": [
+        "none",
+        "standard",
+        "minmax"
+      ],
+      "selection": [
+        "all",
+        "k10"
+      ],
+      "classifiers": [
+        "logistic",
+        "tree",
+        "forest",
+        "svc"
+      ],
+      "hyperparameter_levels": [
+        0,
+        1
+      ]
+    }
+  },
+  "selection": {
+    "threshold": 0.8,
+    "strength": 0.1,
+    "target": 0.760891,
+    "target_definition": "0.9 times median best inner macro-F1 of validation Random Search runs; fixed for every test method/task"
+  },
+  "source_sha256": "dfaf808b84d211f9da8de4ca2abb2d9c7878414aee96b8aeb61b60958aa1feaf",
+  "bank_sha256": "b2bbe6fa734498a4fc30a1705a746d54a981e09ab3b47d4f40012fde7df2a75c",
+  "encoder_sha256": "34134b566587701deb73ede1d7fcdf76348c3a09f41d7804e005f559270d7688",
+  "audit_freeze_sha256": "8f83532496acc68b5aa76bb39a4f590bfa9290f67a397581a47ae64ac98a09eb"
+}

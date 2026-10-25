@@ -3,3 +3,4 @@ src/** -text
 data/audits/** -text
 reports/** -text
 models/** -text
+scripts/** -text
