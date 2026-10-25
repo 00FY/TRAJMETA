@@ -6,6 +6,10 @@ Trajectory-guided AutoML for tabular classification, with a shared LSTM, frozen 
 
 Read the [research report](reports/study-v1/REPORT.md), [study protocol](docs/TRANSFER_STUDY.md), [machine-readable statistics](reports/study-v1/statistics.json), and [dataset attribution](docs/DATA_ATTRIBUTION.md). The original synthetic and real-data pilots remain preserved.
 
+## Open the connected UI
+
+Run `.\scripts\run_ui.ps1` or double-click **Start TrajMeta.cmd**, then open **http://127.0.0.1:8765**. The local dashboard connects real searches, trajectory inspection, dataset provenance, and study comparisons. See the [UI guide](docs/WEB_APP.md) for setup, uploads, and operating limits.
+
 ## Verify or reproduce the transfer study
 
 After environment setup below:
