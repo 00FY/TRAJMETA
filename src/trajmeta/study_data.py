@@ -39,6 +39,7 @@ def create(root, output, retry_pending=False):
             row={k:report[k] for k in ['dataset_key','source_id','source_url','licence','access_date','target_column',
                  'domain','duplicate_group','task_type','path','sha256','verified','categorical_columns',
                  'raw_sha256','metadata_sha256','content_fingerprint','doi']}
+            row['categorical_columns'] = json.dumps(report['categorical_columns'])
             rows.append(row)
             splits.append({'dataset_key':report['dataset_key'],'split':report['split']})
             reports.append(report)
