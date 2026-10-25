@@ -30,18 +30,13 @@ PPO's modest network and 128 transitions per run make this a short-budget compar
 
 ## Reproduction
 
-From the repository with its pinned Python environment:
+From the repository with its pinned Python environment, run `scripts/run_study.ps1` to restore published evidence, restore missing audited data, run tests, verify all saved runs and regenerate the complete report. This verifies recorded evidence without counting it as new experiments.
 
-```powershell
-.\.venv\Scripts\python.exe -m trajmeta.benchmark restore --output data/audits/study-v1
-.\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m trajmeta.study --phase prepare
-.\.venv\Scripts\python.exe -m trajmeta.study --phase validation
-.\.venv\Scripts\python.exe -m trajmeta.study --phase all
-.\.venv\Scripts\python.exe scripts/report_study.py
-```
+For an independent rerun after data restoration, use `python scripts/reproduce_study.py --scope full --output results/replication-001`. Use `--scope final` to hold the published bank/encoder fixed. Both operate in separate directories and compare scores with the published results. `--prepare-only` checks setup without fitting; `--resume` continues a matching replication. The setup preflight was exercised; a second full independent run is not claimed.
 
-Prepare runs training bank generation and encoder sanity checks. Validation freezes choices. All resumes matching completed units and performs final evaluation under the lock. An interrupted unit is deliberately not silently overwritten. A source/configuration change invalidates matching run signatures; use a new study version for changed research conditions.
+The published manifest encoding amendment is recorded in `reports/study-v1/protocol_amendment.json`, with original protocol and run evidence preserved. No dataset values, split assignments, model settings or completed scores were changed.
+
+The timing audit found three total-elapsed trial times above the configured worker response timeout. All observations remain included. This study does not establish a strict end-to-end wall-time bound or an algorithmic wall-clock speed ranking.
 
 The original 864-evaluation pilot is preserved. Its 155 warning-bearing trials are documented in `reports/study-v1/warning_audit.json`. The updated evaluator handles undefined constant-feature ANOVA scores explicitly and raises logistic iteration limits to 5,000. Remaining warnings are retained, not hidden.
 

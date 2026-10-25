@@ -1,0 +1,143 @@
+Partial console capture, beginning after the first four German Credit runs. This is not a complete run log. Search-trial warnings are retained in evaluation JSON; this excerpt also shows warnings emitted by final refits.
+
+test: uci_144 11 retrieval best=0.6639 failures=0
+test: uci_144 11 shaped best=0.6639 failures=0
+test: uci_144 11 final_config best=0.6639 failures=0
+test: uci_144 11 simple_retrieval best=0.6824 failures=0
+test: uci_144 11 cold best=0.6824 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 29 random best=0.6831 failures=0
+test: uci_144 29 optuna best=0.6824 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 29 ppo best=0.6831 failures=0
+test: uci_144 29 metadata best=0.6824 failures=0
+test: uci_144 29 retrieval best=0.6639 failures=0
+test: uci_144 29 shaped best=0.6639 failures=0
+test: uci_144 29 final_config best=0.6824 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 29 simple_retrieval best=0.6831 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 29 cold best=0.6831 failures=0
+test: uci_144 47 random best=0.6824 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 47 optuna best=0.6831 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 47 ppo best=0.6831 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 47 metadata best=0.6831 failures=0
+test: uci_144 47 retrieval best=0.6510 failures=0
+test: uci_144 47 shaped best=0.6510 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 47 final_config best=0.6831 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 47 simple_retrieval best=0.6831 failures=0
+D:\Desktop\TRAJMETA\.venv\Lib\site-packages\sklearn\linear_model\_logistic.py:599: ConvergenceWarning: lbfgs failed to converge after 5000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=5000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+test: uci_144 47 cold best=0.6831 failures=0
+test: uci_151 11 random best=0.8383 failures=0
+test: uci_151 11 optuna best=0.8383 failures=0
+test: uci_151 11 ppo best=0.8383 failures=0
+test: uci_151 11 metadata best=0.8383 failures=0
+test: uci_151 11 retrieval best=0.8383 failures=0
+test: uci_151 11 shaped best=0.8383 failures=0
+test: uci_151 11 final_config best=0.8065 failures=0
+test: uci_151 11 simple_retrieval best=0.8383 failures=0
+test: uci_151 11 cold best=0.8383 failures=0
+test: uci_151 29 random best=0.8070 failures=0
+test: uci_151 29 optuna best=0.7870 failures=0
+test: uci_151 29 ppo best=0.8070 failures=0
+test: uci_151 29 metadata best=0.7915 failures=0
+test: uci_151 29 retrieval best=0.7915 failures=0
+test: uci_151 29 shaped best=0.7915 failures=0
+test: uci_151 29 final_config best=0.7915 failures=0
+test: uci_151 29 simple_retrieval best=0.7915 failures=0
+test: uci_151 29 cold best=0.8070 failures=0
+test: uci_151 47 random best=0.8191 failures=0
+test: uci_151 47 optuna best=0.8383 failures=0
+test: uci_151 47 ppo best=0.8124 failures=0
+test: uci_151 47 metadata best=0.8383 failures=0
+test: uci_151 47 retrieval best=0.8191 failures=0
+test: uci_151 47 shaped best=0.8191 failures=0
+test: uci_151 47 final_config best=0.8383 failures=0
+test: uci_151 47 simple_retrieval best=0.8383 failures=0
+test: uci_151 47 cold best=0.8124 failures=0
+Study complete: 81 held-out runs

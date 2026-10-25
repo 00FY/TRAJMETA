@@ -1,0 +1,82 @@
+{
+  "scope": "Post-execution measurement-quality diagnostic; no outcomes excluded or altered.",
+  "configured_worker_response_timeout_seconds": 120,
+  "elapsed_time_exceedances": [
+    {
+      "phase": "test",
+      "dataset_key": "uci_144",
+      "method": "retrieval",
+      "seed": 11,
+      "evaluation": 1,
+      "elapsed_seconds": 508.42554740000014,
+      "status": "ok"
+    },
+    {
+      "phase": "test",
+      "dataset_key": "uci_144",
+      "method": "retrieval",
+      "seed": 11,
+      "evaluation": 3,
+      "elapsed_seconds": 2149.3591327000004,
+      "status": "ok"
+    },
+    {
+      "phase": "test",
+      "dataset_key": "uci_53",
+      "method": "simple_retrieval",
+      "seed": 29,
+      "evaluation": 31,
+      "elapsed_seconds": 897.6883303000001,
+      "status": "ok"
+    }
+  ],
+  "strict_end_to_end_wall_time_bound_verified": false,
+  "interpretation": "The worker polls after startup and send. Trial elapsed time covers more than that wait. Host scheduling or suspension is not separately measured. Exact causes of long stalls are unknown. Do not interpret wall-time means as algorithmic speed comparisons or claim a strict end-to-end 120-second bound.",
+  "shaped_vs_retrieval_pairs": [
+    {
+      "dataset_key": "uci_53",
+      "seed": 11,
+      "same_configurations_and_scores": false
+    },
+    {
+      "dataset_key": "uci_53",
+      "seed": 29,
+      "same_configurations_and_scores": true
+    },
+    {
+      "dataset_key": "uci_53",
+      "seed": 47,
+      "same_configurations_and_scores": true
+    },
+    {
+      "dataset_key": "uci_144",
+      "seed": 11,
+      "same_configurations_and_scores": true
+    },
+    {
+      "dataset_key": "uci_144",
+      "seed": 29,
+      "same_configurations_and_scores": false
+    },
+    {
+      "dataset_key": "uci_144",
+      "seed": 47,
+      "same_configurations_and_scores": true
+    },
+    {
+      "dataset_key": "uci_151",
+      "seed": 11,
+      "same_configurations_and_scores": false
+    },
+    {
+      "dataset_key": "uci_151",
+      "seed": 29,
+      "same_configurations_and_scores": true
+    },
+    {
+      "dataset_key": "uci_151",
+      "seed": 47,
+      "same_configurations_and_scores": true
+    }
+  ]
+}

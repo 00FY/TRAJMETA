@@ -1,0 +1,23 @@
+{
+  "verified": true,
+  "dataset_count": 16,
+  "training_trajectories": 1056,
+  "run_counts": {
+    "bank": 33,
+    "test": 81,
+    "validation": 54,
+    "validation-grid-0.8-0.1": 6,
+    "validation-grid-0.8-0.3": 6,
+    "validation-grid-0.95-0.1": 6,
+    "validation-grid-0.95-0.3": 6
+  },
+  "total_evaluations": 6144,
+  "failed_trials": 0,
+  "warning_bearing_trials": 30,
+  "checked_episodes": 5184,
+  "cold_parity_pairs": 9,
+  "source_matches_amended_protocol": true,
+  "analysis_unchanged": true,
+  "preserved_pre_amendment_runs": 138,
+  "final_protocol_sha256": "3b2e9b2f6cf50b239dfaae7d54cd7c55fa7d87a67255a49e5f9d36ed199e8a47"
+}

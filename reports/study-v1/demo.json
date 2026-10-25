@@ -1,0 +1,251 @@
+{
+  "scope": "Synthetic development demonstration; not a new benchmark result",
+  "charged_evaluations": 4,
+  "best_inner_score": 0.7655082527162617,
+  "episodes": [
+    {
+      "configuration": {
+        "scaler": "minmax",
+        "selection": "all",
+        "classifier": "forest",
+        "level": 1
+      },
+      "score": 0.7565884407989671,
+      "steps": [
+        {
+          "action": 2,
+          "base_reward": 0.0,
+          "shaped_reward": 0.09533445390649002,
+          "potential": 0.0,
+          "next_potential": 0.9629742818837375,
+          "retrieved": [
+            "uci_52:29:11",
+            "uci_109:29:11",
+            "uci_52:29:30",
+            "uci_109:29:30",
+            "uci_109:11:20"
+          ]
+        },
+        {
+          "action": 2,
+          "base_reward": 0.0,
+          "shaped_reward": 0.0007289835536868017,
+          "potential": 0.9629742818837375,
+          "next_potential": 0.9800647650713187,
+          "retrieved": [
+            "uci_109:11:20",
+            "uci_52:29:17",
+            "uci_52:47:9",
+            "uci_52:29:30",
+            "uci_109:29:30"
+          ]
+        },
+        {
+          "action": 2,
+          "base_reward": 0.0,
+          "shaped_reward": -0.0017232051544177841,
+          "potential": 0.9800647650713187,
+          "next_potential": 0.9725582964920615,
+          "retrieved": [
+            "uci_52:47:9",
+            "uci_52:29:17",
+            "uci_15:29:27",
+            "uci_109:11:20",
+            "uci_52:11:21"
+          ]
+        },
+        {
+          "action": 1,
+          "base_reward": 0.7565884407989671,
+          "shaped_reward": 0.659332611149761,
+          "potential": 0.9725582964920615,
+          "next_potential": 0.0,
+          "retrieved": []
+        }
+      ]
+    },
+    {
+      "configuration": {
+        "scaler": "none",
+        "selection": "all",
+        "classifier": "tree",
+        "level": 1
+      },
+      "score": 0.7655082527162617,
+      "steps": [
+        {
+          "action": 6,
+          "base_reward": 0.0,
+          "shaped_reward": 0.09584538406833915,
+          "potential": 0.0,
+          "next_potential": 0.9681351926094863,
+          "retrieved": [
+            "uci_109:29:11",
+            "uci_109:47:26",
+            "uci_52:29:11",
+            "uci_15:47:26",
+            "uci_52:47:26"
+          ]
+        },
+        {
+          "action": 0,
+          "base_reward": 0.0,
+          "shaped_reward": -0.00020828663592312724,
+          "potential": 0.9681351926094863,
+          "next_potential": 0.9758104305558132,
+          "retrieved": [
+            "uci_109:29:23",
+            "uci_109:11:30",
+            "uci_52:29:25",
+            "uci_15:47:28",
+            "uci_109:47:28"
+          ]
+        },
+        {
+          "action": 1,
+          "base_reward": 0.0,
+          "shaped_reward": -0.0011884339871889528,
+          "potential": 0.9758104305558132,
+          "next_potential": 0.9736627178625491,
+          "retrieved": [
+            "uci_52:29:25",
+            "uci_52:47:3",
+            "uci_52:11:19",
+            "uci_109:11:30",
+            "uci_52:11:7"
+          ]
+        },
+        {
+          "action": 9,
+          "base_reward": 0.7655082527162617,
+          "shaped_reward": 0.6681419809300068,
+          "potential": 0.9736627178625491,
+          "next_potential": 0.0,
+          "retrieved": []
+        }
+      ]
+    },
+    {
+      "configuration": {
+        "scaler": "none",
+        "selection": "all",
+        "classifier": "tree",
+        "level": 0
+      },
+      "score": 0.6893140177949386,
+      "steps": [
+        {
+          "action": 0,
+          "base_reward": 0.0,
+          "shaped_reward": 0.09571980272857396,
+          "potential": 0.0,
+          "next_potential": 0.9668666942280197,
+          "retrieved": [
+            "uci_109:47:26",
+            "uci_15:47:26",
+            "uci_52:47:26",
+            "uci_109:29:11",
+            "uci_52:29:11"
+          ]
+        },
+        {
+          "action": 0,
+          "base_reward": 0.0,
+          "shaped_reward": -0.0004070887423119674,
+          "potential": 0.9668666942280197,
+          "next_potential": 0.9725210169746465,
+          "retrieved": [
+            "uci_109:11:30",
+            "uci_52:29:25",
+            "uci_109:29:23",
+            "uci_52:11:19",
+            "uci_15:47:23"
+          ]
+        },
+        {
+          "action": 1,
+          "base_reward": 0.0,
+          "shaped_reward": -0.0011927064766240393,
+          "potential": 0.9725210169746465,
+          "next_potential": 0.9702969214226325,
+          "retrieved": [
+            "uci_52:29:25",
+            "uci_52:47:3",
+            "uci_52:11:19",
+            "uci_109:11:30",
+            "uci_52:11:7"
+          ]
+        },
+        {
+          "action": 6,
+          "base_reward": 0.6893140177949386,
+          "shaped_reward": 0.5922843256526753,
+          "potential": 0.9702969214226325,
+          "next_potential": 0.0,
+          "retrieved": []
+        }
+      ]
+    },
+    {
+      "configuration": {
+        "scaler": "standard",
+        "selection": "all",
+        "classifier": "logistic",
+        "level": 0
+      },
+      "score": 0.6630311957825334,
+      "steps": [
+        {
+          "action": 1,
+          "base_reward": 0.0,
+          "shaped_reward": 0.0955783095026908,
+          "potential": 0.0,
+          "next_potential": 0.9654374697241495,
+          "retrieved": [
+            "uci_109:47:26",
+            "uci_15:47:26",
+            "uci_52:47:26",
+            "uci_109:29:6",
+            "uci_52:11:8"
+          ]
+        },
+        {
+          "action": 0,
+          "base_reward": 0.0,
+          "shaped_reward": 0.0006975641380755238,
+          "potential": 0.9654374697241495,
+          "next_potential": 0.98223546576253,
+          "retrieved": [
+            "uci_52:47:26",
+            "uci_15:47:26",
+            "uci_109:47:26",
+            "uci_109:11:27",
+            "uci_52:11:21"
+          ]
+        },
+        {
+          "action": 0,
+          "base_reward": 0.0,
+          "shaped_reward": -0.0013036338969863448,
+          "potential": 0.98223546576253,
+          "next_potential": 0.9789890169622895,
+          "retrieved": [
+            "uci_109:11:27",
+            "uci_52:11:21",
+            "uci_15:29:27",
+            "uci_52:29:30",
+            "uci_52:47:26"
+          ]
+        },
+        {
+          "action": 0,
+          "base_reward": 0.6630311957825334,
+          "shaped_reward": 0.5651322940863045,
+          "potential": 0.9789890169622895,
+          "next_potential": 0.0,
+          "retrieved": []
+        }
+      ]
+    }
+  ]
+}
