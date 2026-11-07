@@ -88,3 +88,7 @@ The loader checks the checksum before loading. Missing target labels and insuffi
 The implemented study includes warning review, a frozen dataset audit, training-only trajectory collection, encoder sanity checks, validation-only selection, nine matched-budget methods, held-out evaluation, paired task-level statistics, and a reproducible report. The repository tests cover leakage guards, budget accounting, retrieval versioning, partial/full embedding compatibility, outcome masking, shaping arithmetic, and exact cold-start parity.
 
 Generalization remains limited by three final datasets, short PPO budgets, a small finite search space, and a shared validation-derived score threshold. A larger independent benchmark and confirmatory experiments would be new research work. The source documents' 30% reduction is a hypothesis, not a result promised by the implementation. No private student details or original Word documents are redistributed.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, test commands, the experimental invariants to preserve, and how to report a bug or submit a focused change.
