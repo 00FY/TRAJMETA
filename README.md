@@ -50,7 +50,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m trajmeta.cli bank --output artifacts/my-bank
 ```
 
-The lockfile records the tested Windows/Python 3.12 environment. If a different platform cannot resolve it, install `-e ".[dev,report]"`, run the tests, and freeze a separate lockfile. No execution-policy change is required. The project is stored at `D:\Desktop\TRAJMETA` and backed up at https://github.com/00FY/TRAJMETA. After setup, `scripts/run_local.ps1` runs the pilot using the project-local `.venv`. Per-run PPO policies stay local. Exact recorded runs, study results, the shared encoder and compressed training bank are versioned for inspection.
+The lockfile records the tested Windows/Python 3.12 environment. If a different platform cannot resolve it, install `-e ".[dev,report]"`, run the tests, and freeze a separate lockfile. No execution-policy change is required. Run the commands from your own repository checkout; a specific drive or Desktop location is not required. Source code is available at https://github.com/00FY/TRAJMETA. After setup, `scripts/run_local.ps1` runs the pilot using the project-local `.venv`. Per-run PPO policies stay local. Exact recorded runs, study results, the shared encoder and compressed training bank are versioned for inspection.
 
 Output directories must be new. Runs never overwrite prior evidence. Default directories have unique UTC timestamps. `configs/pilot.yaml` selects three generated training tasks, eight pipeline evaluations per method, three inner folds, and one seed. PPO uses small networks and short updates for a smoke test, not a tuned research baseline.
 
